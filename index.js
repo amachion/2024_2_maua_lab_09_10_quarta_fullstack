@@ -1,7 +1,8 @@
-// console.log("hello, nodeJS")
 const express = require('express')
+const cors = require('cors')
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 // GET http://localhost:3000/oi
 app.get('/oi', (req, res) => {
