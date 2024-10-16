@@ -2,10 +2,10 @@
   "name": "projeto",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "backend.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon backend.js"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +13,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.0",
-    "mongodb": "^3.6.12",
+    "mongodb": "^4.1",
     "mongoose": "^8.7.1"
   },
   "devDependencies": {
