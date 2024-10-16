@@ -1,13 +1,16 @@
+//mongodb+srv://pro_mac:mongo123@cluster0.skf8n.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
 const express = require('express')
 const cors = require('cors')
+const mongoose = require('mongoose')
 const app = express()
 app.use(express.json())
 app.use(cors())
 
-// GET http://localhost:3000/oi
-app.get('/oi', (req, res) => {
-    res.send('oi')
-})
+const Filme = mongoose.model ("Filme", mongoose.Schema({
+    titulo: {type: String},
+    sinopse: {type: String}
+}))
 
 let filmes = [
     {
