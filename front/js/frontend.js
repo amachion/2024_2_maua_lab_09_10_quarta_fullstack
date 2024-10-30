@@ -1,6 +1,5 @@
 const protocolo = 'http://'
 const baseURL = 'localhost:3000'
-const filmesEndpoint = '/filmes'
 
 function listarFilmes (filmes) {
     //atualizar a tabela
@@ -17,13 +16,14 @@ function listarFilmes (filmes) {
         celulaSinopse.innerHTML = filme.sinopse
     }
 }
-
 async function obterFilmes() {
+    const filmesEndpoint = '/filmes'
     const URLcompleta = `${protocolo}${baseURL}${filmesEndpoint}`
     const filmes = (await axios.get(URLcompleta)).data
     listarFilmes(filmes)
 }
 async function cadastrarFilme() {
+    const filmesEndpoint = '/filmes'
     //montar a URL completa
     const URLcompleta = `${protocolo}${baseURL}${filmesEndpoint}`
     //busca nos inputs o que foi digitado
