@@ -33,7 +33,37 @@
             </form>
           </div>
           <div class="modal-footer">
+            <button class="btn btn-secondary" type="button"
+                    data-bs-dismiss="modal">Cancelar</button>
+            <button class="btn btn-primary" type="button"
+                    onclick="cadastrarUsuario()">Cadastrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="modal fade" id="modalLogin" aria-labelledby="modalLogin" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Login</h1>
+          </div>
+          <div class="modal-body">
+            <div class="d-none alert alert-dismissible fade alert-modal-login" role="alert"></div>
+            <form>
+              <div class="mb-3">
+                <label for="usuarioLoginInput" class="col-form-label">Usuário</label>
+                <input type="text" id="usuarioLoginInput" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="passwordLoginInput" class="col-form-label">Senha</label>
+                <input type="password" id="passwordLoginInput" class="form-control">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancelar</button>
+            <button class="btn btn-primary" type="button" onclick="loginUsuario()">Login</button>
           </div>
         </div>
       </div>
@@ -56,7 +86,11 @@
             </button>
             <div class="collapse navbar-collapse" id="myNav">
               <div class="navbar-nav ms-auto">
-                <a class="nav-link active me-2" href="#" aria-current="page">
+                <a id="loginLink"
+                   class="nav-link active me-2" 
+                   href="#" aria-current="page"
+                   data-bs-toggle="modal"
+                   data-bs-target="#modalLogin">
                   Login
                 </a>
                 <a class="nav-link active me-2" 
@@ -72,9 +106,8 @@
       </div>
     </div>
     <div class="container mt-5">
-      <div class="d-none alert alert-danger alert-dismissible fade" role="alert">
-        Preencha todos os campos!!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+      <div class="d-none alert alert-dismissible fade alert-filme"
+           role="alert">
       </div>
 
       <div class="row justify-content-center">
@@ -93,7 +126,7 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-md-8">
-          <button class="btn btn-outline-primary w-100" onclick="cadastrarFilme()">Cadastrar</button>
+          <button id="cadastrarFilmeButton" class="btn btn-outline-primary w-100" onclick="cadastrarFilme()" disabled>Cadastrar</button>
         </div>
       </div>
 
