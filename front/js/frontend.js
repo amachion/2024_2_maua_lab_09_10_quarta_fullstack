@@ -1,6 +1,21 @@
 const protocolo = 'http://'
 const baseURL = 'localhost:3000'
 
+async function prepararPagina() {
+    const token = localStorage.getItem("token")
+    const loginLink = document.querySelector('#loginLink')
+    const cadastrarFilmeButton = document.querySelector('#cadastrarFilmeButton')
+    if (token) {
+        loginLink.innerHTML = 'Logout'
+        cadastrarFilmeButton.disabled = false
+    }
+    else {
+        loginLink.innerHTML = 'Login'
+        cadastrarFilmeButton.disabled = true
+    }
+    obterFilmes()
+} 
+
 function listarFilmes (filmes) {
     //atualizar a tabela
     let tabela = document.querySelector('.filmes')
@@ -60,7 +75,7 @@ async function cadastrarFilme() {
     }
     else {
         exibirAlerta('.alert-filme', "Preencha todos os campos!", 
-            ['show', 'alert-danger'], ['d-none'], 2000
+            ['show', 'alert-danger'], ['d-none', 'alert-success'], 2000
         )
     }
 }
@@ -79,18 +94,18 @@ async function cadastrarUsuario() {
             )
             usuarioCadastroInput.value = ""
             passwordCadastroInput.value = ""
-            exibirAlerta('.alert-modal-cadastro', "Usuário cadastrado com sucesso!!!", ['show', 'alert-success'], ['d-none'], 2000)
+            exibirAlerta('.alert-modal-cadastro', "Usuário cadastrado com sucesso!!!", ['show', 'alert-success'], ['d-none', 'alert-danger'], 2000)
             esconderModal('#modalCadastro', 2000)
         }
         catch (e) {
             usuarioCadastroInput.value = ""
             passwordCadastroInput.value = ""
-            exibirAlerta('.alert-modal-cadastro', "Não foi possível cadastrar!!!", ['show', 'alert-danger'], ['d-none'], 2000)
+            exibirAlerta('.alert-modal-cadastro', "Não foi possível cadastrar!!!", ['show', 'alert-danger'], ['d-none', 'alert-success'], 2000)
             esconderModal('#modalCadastro', 2000)
         }
     }    
     else {
-        exibirAlerta('.alert-modal-cadastro', "Preencha todos os campos!!!", ['show', 'alert-danger'], ['d-none'], 2000)
+        exibirAlerta('.alert-modal-cadastro', "Preencha todos os campos!!!", ['show', 'alert-danger'], ['d-none', 'alert-success'], 2000)
     }
 }
 const loginUsuario = async () => {
@@ -106,20 +121,25 @@ const loginUsuario = async () => {
                 URLcompleta,
                 {login: usuarioLogin, password: passwordLogin}
             )
+            //console.log (response)
+            localStorage.setItem("token", response.data)
             usuarioLoginInput.value = ""
             passwordLoginInput.value = ""
-            exibirAlerta('.alert-modal-login', "Login realizado com sucesso!", ['show', 'alert-success'], ['d-none'], 2000)
+            exibirAlerta('.alert-modal-login', "Login realizado com sucesso!", ['show', 'alert-success'], ['d-none', 'alert-danger'], 2000)
             esconderModal('#modalLogin', 2000)
             const cadastrarFilmeButton = document.querySelector('#cadastrarFilmeButton')
             cadastrarFilmeButton.disabled = false
+            const loginLink = document.querySelector('#loginLink')
+            loginLink.innerHTML = 'Logout'
         }
         catch (e) {
-
+            exibirAlerta('.alert-modal-login', 'Falha na autenticação!',
+                ['show', 'alert-danger'], ['d-none', 'alert-success'], 2000)
         }
     }
     else {
         exibirAlerta('.alert-modal-login', 'Preencha todos os campos!',
-                    ['show', 'alert-danger'], ['d-none'], 2000
+                    ['show', 'alert-danger'], ['d-none', 'alert-success'], 2000
         )
     }
 }
